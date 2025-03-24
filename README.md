@@ -1,10 +1,10 @@
 # ML 23/24-07 Implement ML22/23-8 Implement the SDR representation in the MAUI application
 
-# Abstract:
+## Abstract:
 
 In the field of software engineering, there is a growing demand for user-friendly graphical interfaces, particularly in applications where visualizing data is crucial. This paper details the creation and deployment of a Multimodal Adaptive User Interface (MAUI) application designed to display Sparse Distributed Representations (SDRs) utilizing Scalable Vector Graphics (SVG). The project was motivated by the necessity to seamlessly transition SDR representations from supplied Python scripts to an interactive MAUI application using C#. Our strategy involved crafting a MAUI application capable of accepting input in various forms, including text and file formats, to enhance user convenience. Utilizing the features of SVG, our application generates SDR outputs in both horizontal and vertical layouts, accommodating diverse user preferences. Following extensive development and continuous work, our MAUI application faithfully replicates the functionalities of the expected outcome provided by our professor, successfully meeting the project's primary objective. Our efforts contribute to advancing SDR-based methodologies and the development of MAUI applications, paving the way for future research and innovation in software engineering.
 
-# Introduction:
+## Introduction:
 
 Sparse Distributed Representation is a frequently employed idea in neural network frameworks, especially within unsupervised learning and spatial coding. It involves representing data in a high-dimensional space where only a small fraction of dimensions is given at any time. This representation is valuable for tasks such as pattern recognition, anomaly detection, and memory storage among others.
 
@@ -12,22 +12,26 @@ SDR offers a highly efficient method for representing complex data patterns usin
 
 MAUI applications are designed to adapt to user preferences and input modalities. By incorporating SDR, users can interact with data in various forms, including text, images, and files, making the application more versatile and user-friendly.
 
-# Requirements:
+## Requirements:
 
-To develope and run this project, we need.
+To develop and run this project, we need.
 - [Visual Studio 2022](https://visualstudio.microsoft.com/downloads/)
-- [.NET 8.0 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)
+- [.NET 8.0 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/8.0) and [.NET 9.0 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/9.0)
+- [Python on Windows](https://learn.microsoft.com/en-us/windows/python/beginners#install-python)
 - [.NET Multi-platform App UI workload](https://learn.microsoft.com/en-us/dotnet/maui/get-started/installation?view=net-maui-8.0&tabs=vswin)
 
-# Environment setup:
-To setup the development platform, we have to.
+## Environment setup:
+To set up the development platform, we have to.
 - Install Visual Studio 2022 via [Visual Studio Installer](https://visualstudio.microsoft.com/downloads/)
-- Download and install [.NET SDK](https://dotnet.microsoft.com/en-us/download/dotnet/8.0). Latest version is recommended. 
+- Download and install [.NET 9.0 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/9.0). The latest version is recommended.
+- For project purposes, required to install alongside [.NET 8.0 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)
+- Install Python on Windows via [Microsoft Store](https://apps.microsoft.com/detail/9pnrbtzxmb4z?hl=de-DE&gl=DE)
+- 
 - Install [.NET Multi-platform App UI workload.](https://learn.microsoft.com/en-us/dotnet/maui/get-started/installation?tabs=vswin&view=net-maui-8.0)
 - Build a basic [MAUI Application](https://learn.microsoft.com/en-us/dotnet/maui/get-started/first-app?view=net-maui-8.0&tabs=vswin&pivots=devices-windows) 
 - Add/reference nuget packages `Microsoft.Maui.Controls`, `Microsoft.Maui.Controls.Compatibility`, `SkiaSharp` and `Svg.Skia`.
 
-# Application setup:
+## Application setup:
 To setup core application we have to add the corresponding .razor, services and component files one by one.
 - Place the [Heatmap.razor](https://github.com/KaziMithfa/Representing-SDR-in-MAUI-Group7/blob/main/MauiApp1/Components/Pages/Heatmap.razor) core file inside the components to handle Razor Page.
 - To navigate Heatmap, add conponent under [NavMenu.razor](https://github.com/KaziMithfa/Representing-SDR-in-MAUI-Group7/blob/main/MauiApp1/Components/Layout/NavMenu.razor).
@@ -36,8 +40,8 @@ To setup core application we have to add the corresponding .razor, services and 
 - Add [HeatmapInputModel](https://github.com/KaziMithfa/Representing-SDR-in-MAUI-Group7/blob/main/MauiApp1/HeatmapInputModel.cs) class inside project to deal with initial parameters.
 - Include [MauiProgram](https://github.com/KaziMithfa/Representing-SDR-in-MAUI-Group7/blob/main/MauiApp1/MauiProgram.cs) class to operate input data.
 
-# Code demonstration:
-## MauiProgram
+## Code demonstration:
+### MauiProgram
 The provided C# code defines a static class `MauiProgram`, which contains a static method `CreateMauiApp()` responsible for creating a Maui application instance.
 
 ```csharp
@@ -70,7 +74,7 @@ namespace MauiApp1
 }
 
 ```
-## Input file handeling:
+### Input file handeling:
 The `CsvDataService` class provides methods for extracting data from CSV files or content. 
 
 - `ReadDataFromCsvAsync`: Reads data from a CSV file asynchronously, constructing a list of hash sets containing integer values. Calculates the maximum and minimum values found in the data.
@@ -151,7 +155,7 @@ namespace MauiApp1.Services
     }
 }
 ```
-## HeatmapInputModel
+### HeatmapInputModel
 
 The following C# code defines the `HeatmapInputModel` class, which is utilized for managing input related to a heatmap:
 
@@ -185,7 +189,7 @@ public class HeatmapInputModel
     public bool IsHorizontal { get; set; }
 }
 ```
-## IPath
+### IPath
 
 The code defines an interface named `IPath` with a single method `GetFolderPath()`, which returns a string representing a folder path. It's part of the `MauiApp1.Services` namespace.
 
@@ -199,7 +203,7 @@ namespace MauiApp1.Services
 }
 ```
 
-## PathService
+### PathService
 
 The provided code defines a class named `PathService` within the `MauiApp1.Services` namespace. This class implements the `IPath` interface. The `GetFolderPath()` method of the `PathService` class returns the application data directory path using the `FileSystem.AppDataDirectory` property.
 
@@ -221,7 +225,7 @@ namespace MauiApp1.Services
     }
 }
 ```
-### `HandleValidSubmit()` Method Overview
+#### `HandleValidSubmit()` Method Overview
 
 The `HandleValidSubmit()` method is an asynchronous function designed to manage form submissions. Below is a succinct breakdown of its functionality:
 
@@ -262,7 +266,7 @@ private async Task HandleValidSubmit()
 		heatmapInputModel.MaxCycles.Value : 1000);
 	count = 0;
 ```
-### `CalculateChartDimensions()` Method Overview
+#### `CalculateChartDimensions()` Method Overview
 
 The `CalculateChartDimensions()` method calculates dimensions dynamically for a chart based on the provided data. Here's a concise summary of its functionality:
 
@@ -323,7 +327,7 @@ private void CalculateChartDimensions()
 }
 ```
 
-### `GenerateAxisLabelsVertical()` Method Overview
+#### `GenerateAxisLabelsVertical()` Method Overview
 
 The `GenerateAxisLabelsVertical()` method generates axis labels for a vertical chart. Here's a brief description of its functionality:
 
@@ -375,7 +379,7 @@ private IEnumerable<(string label, int pos)> GenerateAxisLabelsVertical(int min,
 	}
 ```
 
-### DownloadSVG() and SaveSvgAsImageAsync() Methods
+#### DownloadSVG() and SaveSvgAsImageAsync() Methods
 
 The provided code consists of two methods that work together to asynchronously download an SVG image and save it as a PNG file. Here's the Markdown representation of the code:
 
@@ -421,7 +425,7 @@ public async Task SaveSvgAsImageAsync(string svgContent, string filename)
     await NotifyUser(filePath);
 }
 ```
-# Input SDR Data:
+## Input SDR Data:
 ```
 29, 158, 180, 200, 230, 293, 321, 350, 389, 410
 29, 129, 158, 162, 180, 181, 200, 230, 293,
@@ -434,22 +438,22 @@ public async Task SaveSvgAsImageAsync(string svgContent, string filename)
 25, 35, 64, 66, 87, 101, 111, 152, 163, 225, 235, 243, 267, 386, 427,
 25, 35, 64, 87, 101, 111, 152, 163, 177, 224, 225, 243, 267, 386, 411,
 ```
-# Result:
+## Result:
 After building the MAUI Application and compiling the SDR data via either a CSV file or direct text field input the corresponding outputs will be generated.
 
-### **Vertical Representation**
+#### **Vertical Representation**
 ![Vertical](https://github.com/KaziMithfa/Representing-SDR-in-MAUI-Group7/blob/main/Output%20Images/heatmap_vertical.png)
-### **Horizontal Representation**
+#### **Horizontal Representation**
 ![Horizontal](https://github.com/KaziMithfa/Representing-SDR-in-MAUI-Group7/blob/main/Output%20Images/heatmap_horizontal.png)
 
 ## MAUI:
-### **CSV Data Handling**
+#### **CSV Data Handling**
 ![CSV Data Handling](https://github.com/KaziMithfa/Representing-SDR-in-MAUI-Group7/blob/main/Output%20Images/InputAsCSVFile.PNG)
-### **Text Field Data Handling**
+#### **Text Field Data Handling**
 ![Text Field Data Handling](https://github.com/KaziMithfa/Representing-SDR-in-MAUI-Group7/blob/main/Output%20Images/InputAsTextFile.PNG)
-### **Generate Vertical Chart Over Application UI**
+#### **Generate Vertical Chart Over Application UI**
 ![Generate Vertical Chart Over Application UI](https://github.com/KaziMithfa/Representing-SDR-in-MAUI-Group7/blob/main/Output%20Images/VerticalOutput.PNG)
-### **Generate Horizontal Chart Over Application UI**
+#### **Generate Horizontal Chart Over Application UI**
 ![Generate Horizontal Chart Over Application UI](https://github.com/KaziMithfa/Representing-SDR-in-MAUI-Group7/blob/main/Output%20Images/HorizontalOutput.PNG)
-### **Output File Save and Download**
+#### **Output File Save and Download**
 ![Output File Save and Download](https://github.com/KaziMithfa/Representing-SDR-in-MAUI-Group7/blob/main/Output%20Images/DownloadFileAsImageFormat.PNG)
